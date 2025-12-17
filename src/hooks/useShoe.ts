@@ -37,14 +37,22 @@ export const useShoe = (): UseShoeResult => {
       setHistory([]);
       setIsExhausted(false);
     },
-    [setShoe],
+    [],
   );
 
+  // Initialize shoe on mount - ensures fresh shoe on every page load/refresh
   useEffect(() => {
-    // Reset shoe whenever deck settings change.
     // eslint-disable-next-line react-hooks/set-state-in-effect
     initialize(numDecks);
-  }, [initialize, numDecks, resetToken]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []); // Empty deps = runs once on mount
+
+  // Reset shoe whenever deck settings change
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    initialize(numDecks);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [numDecks, resetToken]);
 
   const drawCard = useCallback(() => {
     if (shoeRef.current.length === 0) {
