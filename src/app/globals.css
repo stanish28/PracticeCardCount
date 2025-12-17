@@ -1,0 +1,157 @@
+@import "tailwindcss";
+
+:root {
+  --background: #f8fafc;
+  --foreground: #0f172a;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0b1224;
+    --foreground: #e2e8f0;
+  }
+}
+
+body {
+  background: radial-gradient(circle at 30% 20%, #1b2a44 0%, #0d1526 45%, #0a111f 100%);
+  color: var(--foreground);
+  font-family: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
+  min-height: 100vh;
+  line-height: 1.6;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  overflow-x: hidden !important;
+  width: 100%;
+  max-width: 100vw;
+  position: relative;
+}
+
+#__next, [data-nextjs-scroll-focus-boundary] {
+  overflow-x: hidden;
+  width: 100%;
+  max-width: 100vw;
+}
+
+/* Hide scrollbars while allowing scrolling inside nav */
+nav[style*="scrollbarWidth"]::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+.casino-surface {
+  background:
+    radial-gradient(circle at 50% 20%, rgba(255, 255, 255, 0.06), transparent 35%),
+    radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.03), transparent 25%),
+    linear-gradient(135deg, #0f1f34 0%, #0c1628 40%, #0a1223 100%);
+}
+
+.felt-surface {
+  background:
+    radial-gradient(circle at 30% 20%, rgba(255, 255, 255, 0.08), transparent 35%),
+    radial-gradient(circle at 80% 0%, rgba(255, 255, 255, 0.06), transparent 30%),
+    linear-gradient(145deg, #0f3a2f 0%, #0d3127 50%, #0b2a22 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.felt-surface::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 0);
+  background-size: 120px 120px;
+  opacity: 0.15;
+  pointer-events: none;
+}
+
+.table-border {
+  border: 3px solid rgba(218, 190, 117, 0.5);
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.35) inset,
+    0 15px 40px rgba(0, 0, 0, 0.45),
+    0 0 25px rgba(218, 190, 117, 0.25);
+}
+
+.glow-card {
+  box-shadow:
+    0 10px 25px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(255, 255, 255, 0.06) inset;
+}
+
+.stat-tile {
+  background: linear-gradient(160deg, #0f1729 0%, #0c1525 100%);
+  border: 1px solid rgba(218, 190, 117, 0.2);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.35);
+}
+
+.control-panel {
+  background: linear-gradient(160deg, #0f1729 0%, #0c1525 100%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow:
+    0 10px 25px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(255, 255, 255, 0.04) inset;
+}
+
+.progress-track {
+  background: linear-gradient(90deg, rgba(120, 144, 255, 0.15), rgba(64, 236, 196, 0.15));
+}
+
+.progress-bar {
+  background: linear-gradient(90deg, #6c8bff, #59d6b2);
+  box-shadow: 0 0 10px rgba(89, 214, 178, 0.6);
+}
+
+.card-visual {
+  background: linear-gradient(180deg, #fdfcf9 0%, #f1f0eb 100%);
+  border: 1px solid rgba(0, 0, 0, 0.25);
+  box-shadow:
+    0 10px 25px rgba(0, 0, 0, 0.35),
+    0 1px 0 rgba(255, 255, 255, 0.6) inset;
+}
+
+.mini-card {
+  box-shadow:
+    0 4px 12px rgba(0, 0, 0, 0.35),
+    0 1px 0 rgba(255, 255, 255, 0.5) inset;
+}
+
+.chip-stack {
+  background: radial-gradient(circle at 30% 30%, #ffffff, #d5d5d5 40%, #b8b8b8 70%, #9a9a9a 100%);
+  box-shadow:
+    0 6px 12px rgba(0, 0, 0, 0.35),
+    0 0 0 1px rgba(0, 0, 0, 0.15);
+}
+
+@keyframes deal-slide {
+  from {
+    opacity: 0;
+    transform: translateY(-16px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.animate-deal {
+  animation: deal-slide 180ms ease-out;
+}
+
+.soft-glow:hover {
+  filter: brightness(1.05);
+  transform: translateY(-1px) scale(1.01);
+  transition: transform 150ms ease, filter 150ms ease;
+}
