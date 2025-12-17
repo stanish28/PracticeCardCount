@@ -40,14 +40,8 @@ export const useShoe = (): UseShoeResult => {
     [],
   );
 
-  // Initialize shoe on mount - ensures fresh shoe on every page load/refresh
-  useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    initialize(numDecks);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []); // Empty deps = runs once on mount
-
-  // Reset shoe whenever deck settings change
+  // Initialize shoe on mount and whenever deck settings change
+  // This ensures fresh shoe on every page load/refresh with the correct number of decks
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
     initialize(numDecks);
@@ -69,14 +63,15 @@ export const useShoe = (): UseShoeResult => {
     return card;
   }, []);
 
-  // Keep shoe ref aligned with state when external changes occur (unlikely but safe)
+  // Keep shoe ref aligned with state when external changes occur
+  // Only mark as exhausted if shoe is empty AND we've actually dealt cards (not just initialized)
   useEffect(() => {
     shoeRef.current = shoe;
-    if (shoe.length === 0 && !isExhausted) {
+    if (shoe.length === 0 && cardsDealt > 0 && !isExhausted) {
       // eslint-disable-next-line react-hooks/set-state-in-effect
       setIsExhausted(true);
     }
-  }, [shoe, isExhausted]);
+  }, [shoe, isExhausted, cardsDealt]);
 
   const resetShoe = useCallback(() => {
     initialize(numDecks);
