@@ -20,12 +20,13 @@ export const StatsPanel = ({
   penetration: number;
   feedback?: string;
 }) => {
-  const countColor =
-    runningCount > 0
+  const countColor = showCount
+    ? runningCount > 0
       ? "text-emerald-400"
       : runningCount < 0
         ? "text-rose-400"
-        : "text-slate-100";
+        : "text-slate-100"
+    : "text-slate-100"; // White when hidden
 
   const percent = Math.min(100, Math.round(penetration * 100));
 
